@@ -1,3 +1,4 @@
 node_modules
 config/nodemon.json
 .DS_Store
+**/.DS_Store
