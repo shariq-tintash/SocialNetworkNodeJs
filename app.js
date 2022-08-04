@@ -6,6 +6,8 @@ const morgan = require('morgan');
 
 // Internal imports
 const feedRoutes = require('./routes/feed');
+const invalidRouter = require("./routes/invalidRouter");
+const apiErrorHandler = require("./errors/apiErrorHandler");
 
 // Environment variables
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
@@ -38,5 +40,8 @@ app.use(express.urlencoded({extended: false}));
 
 // Routing
 app.use('/feed', feedRoutes);
+app.all("/*", invalidRouter);
 
 // Error Handling
+app.use(apiErrorHandler);
+
