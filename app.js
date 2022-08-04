@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 // Internal imports
-const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
+const feedRoutes = require('./routes/feed');
+const userFollowRoutes = require('./routes/userFollow');
 const invalidRouter = require("./routes/invalidRouter");
 const apiErrorHandler = require("./errors/apiErrorHandler");
 const isAuth = require('./middleware/isAuth');
@@ -42,6 +43,7 @@ app.use(express.urlencoded({extended: false}));
 // Routing
 app.use('/auth', authRoutes);
 app.use('/feed',isAuth, feedRoutes);
+app.use('/account',isAuth, userFollowRoutes);
 app.all("/*", invalidRouter);
 
 // Error Handling
