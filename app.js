@@ -15,6 +15,11 @@ const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
   process.env.MONGO_PASSWORD
 }@socialnetworknodejs.a2k6a.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
+// Environment variables
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
+  process.env.MONGO_PASSWORD
+}@socialnetworknodejs.a2k6a.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+
 // Initiliazing Express App
 const app = express();
 
@@ -31,6 +36,7 @@ mongoose
 	.catch(err => {
 			console.log(err);
 	});
+
 
 
 // Middlewares
