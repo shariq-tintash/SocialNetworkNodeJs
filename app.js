@@ -19,17 +19,17 @@ const app = express();
 
 // Connecting to MongoDb database
 mongoose
-	.connect(MONGODB_URI)
-	.then(result => {
-			// https
-			//   .createServer({ key: privateKey, cert: certificate }, app)
-			//   .listen(process.env.PORT || 3000);
-			app.listen(process.env.SERVER_PORT);
-			console.log(`Server listening on PORT ${process.env.SERVER_PORT}`);
-	})
-	.catch(err => {
-			console.log(err);
-	});
+    .connect(MONGODB_URI)
+    .then(result => {
+        // https
+        //   .createServer({ key: privateKey, cert: certificate }, app)
+        //   .listen(process.env.PORT || 3000);
+        app.listen(process.env.SERVER_PORT);
+        console.log(`Server listening on PORT ${process.env.SERVER_PORT}`);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 
 
 // Middlewares
