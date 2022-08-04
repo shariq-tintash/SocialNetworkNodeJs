@@ -30,7 +30,7 @@ exports.getPosts = (req, res, next) => {
 exports.createPost = (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		next(ApiError.unprocessable('Validation failed, entered data is incorrect.'))
+		next(ApiError.unprocessable(errors.array()))
 	}
 	const title = req.body.title;
 	const content = req.body.content;
