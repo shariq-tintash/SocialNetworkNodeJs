@@ -5,6 +5,16 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 // Internal imports
+const authRoutes = require('./routes/auth');
+const feedRoutes = require('./routes/feed');
+const userFollowRoutes = require('./routes/userFollow');
+const invalidRouter = require("./routes/invalidRouter");
+const apiErrorHandler = require("./errors/apiErrorHandler");
+const isAuth = require('./middleware/isAuth');
+// Environment variables
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
+  process.env.MONGO_PASSWORD
+}@socialnetworknodejs.a2k6a.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
 // Environment variables
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
@@ -36,6 +46,11 @@ app.use(express.urlencoded({extended: false}));
 
 
 // Routing
-
+app.use('/auth', authRoutes);
+app.use('/feed',isAuth, feedRoutes);
+app.use('/account',isAuth, userFollowRoutes);
+app.all("/*", invalidRouter);
 
 // Error Handling
+app.use(apiErrorHandler);
+
