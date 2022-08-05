@@ -26,8 +26,12 @@ mongoose
 			// https
 			//   .createServer({ key: privateKey, cert: certificate }, app)
 			//   .listen(process.env.PORT || 3000);
-			app.listen(process.env.SERVER_PORT);
+			const server = app.listen(process.env.SERVER_PORT);
 			console.log(`Server listening on PORT ${process.env.SERVER_PORT}`);
+			const io = require('./socket').init(server);
+			io.on('connection', socket => {
+				console.log('Client connected');
+			});
 	})
 	.catch(err => {
 			console.log(err);
