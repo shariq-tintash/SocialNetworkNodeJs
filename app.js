@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path')
+
 // Internal imports
 const authRoutes = require('./routes/auth');
 const moderatorAuthRoutes = require('./routes/moderatorAuth');
@@ -16,6 +17,11 @@ const isAuth = require('./middleware/isAuth');
 const isModeratorAuth = require('./middleware/isModeratorAuth');
 const paymentRoutes = require('./routes/payment');
 const checkoutRoutes = require('./routes/checkout');
+// Environment variables
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
+  process.env.MONGO_PASSWORD
+}@socialnetworknodejs.a2k6a.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+
 // Environment variables
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
   process.env.MONGO_PASSWORD
@@ -40,7 +46,6 @@ mongoose
 	})
 	.catch(err => {
 			console.log(err);
-	});
 
 
 // Middlewares
