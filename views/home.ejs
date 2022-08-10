@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<title>Stripe Payment</title>
+<body>
+	<h3>Welcome to Payment Gateway</h3>
+	<form action="checkout/token" method="POST">
+	<script
+		src="https://checkout.stripe.com/v2/checkout.js"
+		class="stripe-button"
+		data-key="<%= key %>"
+		data-amount="30"
+		data-currency="USD"
+		data-name="Test Stripe"
+		data-description="Stripe Payment"
+		data-locale="auto" >
+		</script>
+	</form>
+</body>
+</html>
+

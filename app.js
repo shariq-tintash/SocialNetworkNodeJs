@@ -3,7 +3,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-
+const path = require('path')
 // Internal imports
 const authRoutes = require('./routes/auth');
 const feedRoutes = require('./routes/feed');
@@ -11,6 +11,8 @@ const userFollowRoutes = require('./routes/userFollow');
 const invalidRouter = require("./routes/invalidRouter");
 const apiErrorHandler = require("./errors/apiErrorHandler");
 const isAuth = require('./middleware/isAuth');
+const paymentRoutes = require('./routes/payment');
+const checkoutRoutes = require('./routes/checkout');
 // Environment variables
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
   process.env.MONGO_PASSWORD
@@ -43,11 +45,16 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+// View Engine Setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Routing
 app.use('/auth', authRoutes);
 app.use('/feed',isAuth, feedRoutes);
 app.use('/account',isAuth, userFollowRoutes);
+app.use('/payment',isAuth,paymentRoutes);
+app.use('/checkout',checkoutRoutes); //path for logging stripe token
 app.all("/*", invalidRouter);
 
 // Error Handling

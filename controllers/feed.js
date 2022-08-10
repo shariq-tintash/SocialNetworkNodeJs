@@ -14,6 +14,12 @@ exports.getPosts = (req, res, next) => {
 		return user;
 	})
 	.then(user => {
+
+		// check for paid user
+		if(!user.isPaid){
+			throw ApiError.unAuthorized("Not Authotized");
+		}
+		
 		return Post.find({creator :{ "$in" : user.following}}).countDocuments();
 	})
 	.then(count => {
@@ -33,7 +39,7 @@ exports.getPosts = (req, res, next) => {
 	})
 	
 	.catch(err => {
-		next(ApiError.internal(err))
+		next(err);
 	});  
 };
 
