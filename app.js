@@ -6,11 +6,14 @@ const morgan = require('morgan');
 const path = require('path')
 // Internal imports
 const authRoutes = require('./routes/auth');
+const moderatorAuthRoutes = require('./routes/moderatorAuth');
+const moderatorFeedRoutes = require('./routes/moderatorFeed');
 const feedRoutes = require('./routes/feed');
 const userFollowRoutes = require('./routes/userFollow');
 const invalidRouter = require("./routes/invalidRouter");
 const apiErrorHandler = require("./errors/apiErrorHandler");
 const isAuth = require('./middleware/isAuth');
+const isModeratorAuth = require('./middleware/isModeratorAuth');
 const paymentRoutes = require('./routes/payment');
 const checkoutRoutes = require('./routes/checkout');
 // Environment variables
@@ -55,8 +58,12 @@ app.use('/feed',isAuth, feedRoutes);
 app.use('/account',isAuth, userFollowRoutes);
 app.use('/payment',isAuth,paymentRoutes);
 app.use('/checkout',checkoutRoutes); //path for logging stripe token
-app.all("/*", invalidRouter);
+
+// Routes for Moderators
+app.use('/moderator/auth', moderatorAuthRoutes);
+app.use('/moderator/feed', isModeratorAuth , moderatorFeedRoutes);
 
 // Error Handling
+app.all("/*", invalidRouter);
 app.use(apiErrorHandler);
 
