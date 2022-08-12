@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Moderator = require('../models/moderator');
-const ApiError = require('../errors/ApiError');
+const ApiError = require('../errors/apiError');
 
 exports.signup = (req, res, next) => {
   const errors = validationResult(req);

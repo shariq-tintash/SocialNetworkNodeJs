@@ -1,4 +1,4 @@
-const ApiError = require('../errors/ApiError');
+const ApiError = require('../errors/apiError');
 const User = require('../models/user');
 const stripe = require('stripe')(process.env.Secret_Key)
 

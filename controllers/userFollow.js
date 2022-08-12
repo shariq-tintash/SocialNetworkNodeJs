@@ -1,4 +1,4 @@
-const ApiError = require('../errors/ApiError');
+const ApiError = require('../errors/apiError');
 const User = require('../models/user');
 
 exports.getFollowers = (req, res, next) => {

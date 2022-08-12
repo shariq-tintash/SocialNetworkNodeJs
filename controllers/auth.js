@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
-const ApiError = require('../errors/ApiError');
+const ApiError = require('../errors/apiError');
 
 exports.signup = (req, res, next) => {
   const errors = validationResult(req);
@@ -54,7 +54,7 @@ exports.login = (req, res, next) => {
           userId: loadedUser._id.toString()
         },
         process.env.JWT_SECRET,
-        { expiresIn: '1h' }
+        { expiresIn: '200h' }
       );
       res.status(200).json({ token: token, userId: loadedUser._id.toString() });
     })

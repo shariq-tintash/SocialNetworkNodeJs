@@ -1,4 +1,4 @@
-const ApiError = require("../errors/ApiError");
+const ApiError = require("../errors/apiError");
 
 // Controller Actions
 module.exports.invalid_route = (req, res, next) => {

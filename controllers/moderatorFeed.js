@@ -1,4 +1,4 @@
-const ApiError = require('../errors/ApiError');
+const ApiError = require('../errors/apiError');
 const Post = require('../models/post');
 const Moderator = require('../models/moderator');
 const { validationResult } = require('express-validator');
