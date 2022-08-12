@@ -4,7 +4,7 @@ const stripe = require('stripe')(process.env.Secret_Key)
 
 
 exports.renderPage = (req, res, next) => {
-	res.render('Home', {
+	res.render('home', {
         key: process.env.Publishable_Key
    })
 };
