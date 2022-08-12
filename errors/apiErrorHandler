@@ -1,0 +1,28 @@
+const ApiError = require("./ApiError");
+
+function apiErrorHandler(error, req, res, next) {
+  // Logging the error
+  console.error(error);
+
+  // if it is one of the errors we generated
+  if (error instanceof ApiError) {
+    res.status(error.status || 500);
+    res.json({
+      error: {
+        message: error.message,
+      },
+    });
+
+    return;
+  }
+
+  // if some other error
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message || "something went wrong internally",
+    },
+  });
+}
+
+module.exports = apiErrorHandler;
