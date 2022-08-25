@@ -5,10 +5,11 @@
   "main": "app.js",
   "engines": {
     "node": "16.16.0",
-    "npm":"8.11.0"
+    "npm": "8.11.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc mocha --recursive --timeout 60000  --exit",
+    "coverage": "nyc npm run test",
     "start": "node app.js",
     "start:dev": "nodemon app.js"
   },
@@ -28,10 +29,17 @@
     "express": "^4.18.1",
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^8.9.0",
     "mongoose": "^6.5.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "socket.io": "^4.5.1",
-    "stripe": "^10.1.0"
+    "stripe": "^10.1.0",
+    "supertest": "^6.2.4"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*",
+    "nyc": "^15.1.0"
   }
 }

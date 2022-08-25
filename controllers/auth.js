@@ -39,14 +39,15 @@ exports.login = (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
-        next(ApiError.unAuthorized("A user with this email could not be found."));
+        throw ApiError.unAuthorized("A user with this email could not be found.");
+
       }
       loadedUser = user;
       return bcrypt.compare(password, user.password);
     })
     .then(isEqual => {
       if (!isEqual) {
-        next(ApiError.unAuthorized("Wrong Passowrd"))
+        throw ApiError.unAuthorized("Wrong Passowrd");
       }
       const token = jwt.sign(
         {
@@ -59,6 +60,6 @@ exports.login = (req, res, next) => {
       res.status(200).json({ token: token, userId: loadedUser._id.toString() });
     })
     .catch(err => {
-        next(ApiError.internal(err));
+        next(err);
     });
 };
