@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "**/test/**",
+    "socket.js",
+    "middleware/**",
+    "errors/**",
+    "controllers/moderatorAuth.js",
+    "controllers/checkout.js",
+    "routes/moderatorAuth.js"
+  ]
+}

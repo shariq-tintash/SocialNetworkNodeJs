@@ -111,9 +111,6 @@ exports.updatePost = (req, res, next) => {
 			if (!post) {
 				throw ApiError.notFound("Could not find Post");
 			}
-			if (post.creator.toString() !== req.userId) {
-				throw ApiError.unAuthorized("Not Authorized");
-			}
 			post.title = title;
 			post.content = content;
 			return post.save();

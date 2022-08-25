@@ -2,7 +2,7 @@ const ApiError = require("./apiError");
 
 function apiErrorHandler(error, req, res, next) {
   // Logging the error
-  console.error(error);
+  //console.error(error);
 
   // if it is one of the errors we generated
   if (error instanceof ApiError) {

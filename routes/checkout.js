@@ -1,15 +1,15 @@
 const express = require('express');
 const payment = require('../controllers/payment');
-
+const checkout = require('../controllers/checkout');
 const router = express.Router();
 
 // GET /checkout
-router.get('',payment.renderPage);
+router.get('',checkout.renderPage);
 
 // POST /checkout/token
 router.post(
     '/token',
-    payment.logToken
+    checkout.logToken
     );
 
 module.exports = router;    

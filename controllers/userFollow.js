@@ -14,7 +14,7 @@ exports.getFollowers = (req, res, next) => {
 exports.getFollowing = (req, res, next) => {
 	User.findById(req.userId)
 			.then(user => {
-				res.status(200).json({ message: 'Followings fetched.', followers: user.following });
+				res.status(200).json({ message: 'Followings fetched.', following: user.following });
 			})
 			.catch(err => {
 				next(err)
@@ -27,9 +27,6 @@ exports.followUser = (req, res, next) => {
 			.then(user => {
 				if(!user){
 					throw ApiError.notFound("Could not find User");
-				}
-				if(user.id==req.userId){
-					throw ApiError.badRequest("Bad Request");
 				}
 				if(user.followers.includes(req.userId)){
 					throw ApiError.badRequest("Already Followed");
